@@ -33,9 +33,8 @@ steps:
     pytest
   displayName: 'pytest'
 
-- task: PythonScript@0
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
   inputs:
-    scriptSource: 'inline'
-    script: |
-      print('Hello world 1')
-      print('Hello world 2')
+    testResultsFiles: '**/test-*.xml'
+    testRunTitle: 'Publish test results for Python $(python.version)'
